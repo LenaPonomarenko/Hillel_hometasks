@@ -4,18 +4,26 @@ package ua.hillel.Ponomarenko.Lesson2.task8;
 public class Task8 {
     public static void main(String[] args) {
         int arr[] = {136, 3, 691, 5, 160};
+        int arr1[] = new int[0];
         sumMaxMin(arr);
+        sumMaxMin(arr1);
+
     }
 
     public static void sumMaxMin(int arr[]) {
-        int max = arr[0];
-        int min = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-           if(arr[i]>max)
-               max=arr[i];
-           if(arr[i]<min)
-               min=arr[i];
+        if (arr.length > 0) {
+            int max = arr[0];
+            int min = arr[0];
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] > max)
+                    max = arr[i];
+                if (arr[i] < min)
+                    min = arr[i];
+            }
+            System.out.println(max + min);
+        } else {
+            System.out.println("Array is empty");
         }
-        System.out.println(max+min);
     }
 }
+
