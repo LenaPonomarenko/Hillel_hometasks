@@ -1,5 +1,8 @@
 package ua.hillel.Ponomarenko.Lesson3.task4;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /*Реализовать программу собственного пенсионного накопления.
 Изначально вы вклываете некоторую сумму в банк и каждый месяц пополняете данную сумму на фиксированую сумму.
 Посчитать сколько будет ваш депозит на момент выхода на пенсию. Банк считает проценты по месяцам исходя из процентной
@@ -8,20 +11,23 @@ package ua.hillel.Ponomarenko.Lesson3.task4;
 уменьшаться каждый год.*/
 public class Task4 {
     public static void main(String[] args) {
-        countRetirementSavingsAmount(100.0, 1000, 15, 12);
+        countRetirementSavingsAmount(new BigDecimal(100), 1000, 15, 5);
     }
 
-    public static void countRetirementSavingsAmount(double investment, int monthInvestment, int percent, int monthBeforeRetire) {
-        double initialInvestment = investment * percent / 12 / 100 + investment;
+    public static void countRetirementSavingsAmount(BigDecimal investment, int monthInvestment, int percent, int monthBeforeRetire) {
+        BigDecimal initialInvestment = investment.add(investment.multiply(new BigDecimal(percent)).divide(new BigDecimal("1200")));
+        System.out.println(initialInvestment);
+        System.out.println();
         investment = initialInvestment;
         for (int i = 1; i < monthBeforeRetire; i++) {
             monthInvestment+=10;
-            investment += (double) monthInvestment;
-            investment += investment * percent / 12 / 100;
+            investment = investment.add(new BigDecimal(monthInvestment));
+            investment = investment.add(investment.multiply(new BigDecimal(percent)).divide(new BigDecimal("1200"))) ;
+            System.out.println(investment);
             if ((i+1) % 12 == 0) {
                 percent--;
             }
         }
-        System.out.println(investment);
+        System.out.println(investment.setScale(2,RoundingMode.HALF_UP));
     }
 }

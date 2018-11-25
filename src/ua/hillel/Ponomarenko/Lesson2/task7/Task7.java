@@ -1,4 +1,7 @@
 package ua.hillel.Ponomarenko.Lesson2.task7;
+
+import java.util.stream.IntStream;
+
 //Найдите среднее арифметическое элементов массива
 public class Task7 {
     public static void main(String[] args) {
@@ -9,11 +12,7 @@ public class Task7 {
     }
     public static void average(int arr[]){
         if (arr.length>0) {
-            int count = 0;
-            for (int i = 0; i < arr.length; i++) {
-                count += arr[i];
-            }
-            System.out.println((double) count / arr.length);
+            System.out.println((double) IntStream.of(arr).reduce(0, (y, x) -> y + x)/arr.length);
         }
         else {
             System.out.println("Array is empty");

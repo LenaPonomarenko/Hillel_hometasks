@@ -14,22 +14,18 @@ public class Task1 {
                 "**        **" + "\n" +
                 "********  **" + "\n" +
                 "********  **";
-        countCharacters(myInitials);
+        countCharacters(myInitials,'*');
+        countCharacters(myInitials,' ');
     }
 
-    public static void countCharacters(String str) {
-        int countAsterisk = 0;
-        int countSpase = 0;
+    public static void countCharacters(String str, char symbol) {
+        int countSymbol = 0;
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '*') {
-                countAsterisk += 1;
-            }
-            if (str.charAt(i) == ' ') {
-                countSpase += 1;
+            if (str.charAt(i) == symbol) {
+                countSymbol += 1;
             }
         }
-        System.out.println("Number of *: " + countAsterisk);
-        System.out.println("Number of spaces: " + countSpase);
+        System.out.printf("Number of '%c': %d"+"\n",symbol,countSymbol);
     }
 }
 

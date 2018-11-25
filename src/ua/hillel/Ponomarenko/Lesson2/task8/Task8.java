@@ -1,5 +1,7 @@
 package ua.hillel.Ponomarenko.Lesson2.task8;
 
+import java.util.stream.IntStream;
+
 //Определите сумму минимального и максимального элементов массива
 public class Task8 {
     public static void main(String[] args) {
@@ -8,19 +10,12 @@ public class Task8 {
         sumMaxMin(arr);
         sumMaxMin(arr1);
 
+
     }
 
     public static void sumMaxMin(int arr[]) {
         if (arr.length > 0) {
-            int max = arr[0];
-            int min = arr[0];
-            for (int i = 1; i < arr.length; i++) {
-                if (arr[i] > max)
-                    max = arr[i];
-                if (arr[i] < min)
-                    min = arr[i];
-            }
-            System.out.println(max + min);
+            System.out.println(IntStream.of(arr).min().getAsInt() + IntStream.of(arr).max().getAsInt());
         } else {
             System.out.println("Array is empty");
         }
