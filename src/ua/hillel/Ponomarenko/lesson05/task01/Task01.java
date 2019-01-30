@@ -14,50 +14,57 @@ public class Task01 {
         System.out.println(complexNum1.divide(complexNum2));
         System.out.println(complexNum1.compareTo(complexNum2));
 
-        Complex comlexArr1[] = new Complex[]{new Complex(11, 13), new Complex(7, 5),
-                new Complex(9, 3), new Complex(16, 2)};
-        Complex comlexArr2[] = new Complex[]{new Complex(8, 4), new Complex(17, 5),
-                new Complex(3, 9)};
-        Complex complexArr3[] = new Complex[comlexArr1.length + comlexArr2.length];
+        Complex comlexArr1[] = new Complex[]{new Complex(11, 6), new Complex(7, 1),
+                new Complex(6), new Complex(17, 13), new Complex(9, 2),
+                new Complex(16, 6)};
+        Complex comlexArr2[] = new Complex[]{new Complex(8, 5), new Complex(1, 11),
+                new Complex(17, 3), new Complex(3)};
         mergeSort(comlexArr1, 0, comlexArr1.length - 1);
-        System.out.println(Arrays.toString(comlexArr1));
+        System.out.println("First sorted array: "+Arrays.toString(comlexArr1));
         mergeSort(comlexArr2, 0, comlexArr2.length - 1);
-        System.out.println(Arrays.toString(comlexArr2));
-        for (int i = 0; i < comlexArr1.length; i++) {
-            complexArr3[i] = comlexArr1[i];
+        System.out.println("Second sorted array: "+Arrays.toString(comlexArr2));
+
+        Complex[] resultArray = joinArrays(comlexArr1, comlexArr2);
+        merge(resultArray, 0, comlexArr1.length - 1, resultArray.length - 1);
+        System.out.println("Merged sorted arrays: "+Arrays.toString(resultArray));
+
+    }
+
+    public static Complex[] joinArrays(Complex[] arr1, Complex[] arr2) {
+        Complex[] array = new Complex[arr1.length + arr2.length];
+        for (int i = 0; i < arr1.length; i++) {
+            array[i] = arr1[i];
         }
-        for (int i = 0; i < comlexArr2.length; i++) {
-            complexArr3[comlexArr2.length + i] = comlexArr2[i];
+        for (int i = 0; i < arr2.length; i++) {
+            array[arr1.length + i] = arr2[i];
         }
-        merge(complexArr3, 0, complexArr3.length - 1);
-        System.out.println(Arrays.toString(complexArr3));
+        return array;
     }
 
     public static void mergeSort(Complex[] arr, int start, int end) {
         if (start < end) {
             if (end - start == 1) {
-                if (arr[start].compareTo(arr[end]) == -1) {
+                if (arr[start].compareTo(arr[end]) == 1) {
                     arr[start] = arr[start].minus(arr[end]);
                     arr[end] = arr[start].plus(arr[end]);
                     arr[start] = arr[end].minus(arr[start]);
                 }
             } else {
-                mergeSort(arr, start, start + (start + end) / 2);
-                mergeSort(arr, start + (start + end) / 2 + 1, end);
-                merge(arr, start, end);
+                mergeSort(arr, start, start + (end - start) / 2);
+                mergeSort(arr, start + (end - start) / 2 + 1, end);
+                merge(arr, start, start + (end - start) / 2, end);
             }
         }
     }
 
-    public static void merge(Complex[] arr, int start, int end) {
-        int middle = start + (end - start) / 2;
+    public static void merge(Complex[] arr, int start, int middle, int end) {
         int first = start;
         int last = middle + 1;
         Complex array[] = new Complex[end - start + 1];
         int index = 0;
 
         while (first <= middle && last <= end) {
-            if (arr[first].compareTo(arr[last]) == -1 || arr[first].compareTo(arr[last]) == 0) {
+            if (arr[first].compareTo(arr[last]) == 1 || arr[first].compareTo(arr[last]) == 0) {
                 array[index] = arr[last];
                 last++;
             } else {

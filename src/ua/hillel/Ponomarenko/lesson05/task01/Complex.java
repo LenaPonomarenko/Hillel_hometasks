@@ -51,10 +51,10 @@ public class Complex implements Comparable<Complex> {
     @Override
     public int compareTo(Complex o) {
         if(absComplex(this)>absComplex(o)){
-            return -1;
+            return 1;
         }
         if (absComplex(this)<absComplex(o)){
-            return 1;
+            return -1;
         }
         return 0;
     }
